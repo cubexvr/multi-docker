@@ -10,7 +10,13 @@ script:
     - docker run -e CI=true cubexvr/react-test npm test
 
 after_success:
-    docker build -t cubexvr/multi-client -f ./client
-    docker build -t cubexvr/multi-nginx -f ./nginx
-    docker build -t cubexvr/multi-server -f ./server
-    docker build -t cubexvr/multi-worker -f ./worker
+    - docker build -t cubexvr/multi-client -f ./client
+    - docker build -t cubexvr/multi-nginx -f ./nginx
+    - docker build -t cubexvr/multi-server -f ./server
+    - docker build -t cubexvr/multi-worker -f ./worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push cubexvr/multi-client
+    - docker push cubexvr/multi-nginx
+    - docker push cubexvr/multi-server
+    - docker push cubexvr/multi-worker
+
