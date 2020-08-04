@@ -20,3 +20,15 @@ after_success:
     - docker push cubexvr/multi-server
     - docker push cubexvr/multi-worker
 
+    deploy:
+        edge: true
+        provider: elasticbeanstalk
+        region: "us-east-2"
+        app: "multi-docker"
+        env: "MultiDocker-env"
+        bucket_name: "elasticbeanstalk-us-east-2-035983262215"
+        bucket_path: "multi-docker"
+        on:
+            branch: master        
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
