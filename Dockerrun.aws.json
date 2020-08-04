@@ -5,23 +5,27 @@
             "name": "client",
             "image": "cubexvr/multi-client",
             "hostname": "client",
+            "memory": 128,
             "essential": false            
         },
         {
             "name": "server",
             "image": "cubexvr/multi-server",
             "hostname": "api",
+            "memory": 128,
             "essential": false            
         },
         {
             "name": "worker",
             "image": "cubexvr/multi-worker",
             "hostname": "worker",
+            "memory": 128,
             "essential": false            
         },
         {
             "name": "nginx",
             "image": "cubexvr/multi-nginx",
+            "memory": 128,
             "essential": true,
             "portMappings": [
                 {
