@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t cubexvr/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true cubexvr/react-test npm test
+
+after_success:
+    docker build -t cubexvr/multi-client -f ./client
+    docker build -t cubexvr/multi-nginx -f ./nginx
+    docker build -t cubexvr/multi-server -f ./server
+    docker build -t cubexvr/multi-worker -f ./worker
